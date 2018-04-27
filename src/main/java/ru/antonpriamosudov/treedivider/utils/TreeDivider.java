@@ -11,12 +11,14 @@ import java.util.Set;
 public class TreeDivider {
     private static Set<Tree<Integer>> treeSet = new HashSet<Tree<Integer>>();
 
-    public static void divide(Tree<Integer> tree, final int maxSize) {
-        treeSet.clear();
+    public static Set<Tree<Integer>> divide(Tree<Integer> tree, final int maxSize) {
+        treeSet = new HashSet<Tree<Integer>>();
 
         countSubTreeSize(tree.getRootNode(), 0, maxSize);
         subTree(tree.getRootNode(), 0, maxSize, new Node<Integer>());
         System.out.println(treeSet);
+
+        return treeSet;
     }
 
     private static void subTree(Node<Integer> root, int currentSize, final int maxSize, Node<Integer> newNode) {

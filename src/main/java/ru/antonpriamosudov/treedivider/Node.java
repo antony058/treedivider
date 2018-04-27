@@ -79,4 +79,31 @@ public class Node<T> {
     public void setSubTreeSize(Integer subTreeSize) {
         this.subTreeSize = subTreeSize;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+
+        Integer value = (Integer) data;
+        result = result * prime + value;
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (this.getClass() != obj.getClass())
+            return false;
+
+        Integer value = ((Node<Integer>) obj).getData();
+        if (data != value)
+            return false;
+
+        return true;
+    }
 }

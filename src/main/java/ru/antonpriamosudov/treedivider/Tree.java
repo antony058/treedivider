@@ -38,7 +38,7 @@ public class Tree<T> {
             return false;
 
         Tree<T> tree = (Tree<T>) obj;
-        if (rootNode != ((Tree<T>) obj).rootNode)
+        if (!rootNode.equals(tree.getRootNode()))
             return false;
 
         return true;
