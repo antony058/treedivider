@@ -23,6 +23,11 @@ public class Node<T> {
         this.parentNode = node.getParentNode();
     }
 
+    public void copySubTree(Node<T> node) {
+        this.data = node.data;
+        this.childNodesList = node.getChildNodesList();
+    }
+
     public Node<T> getParentNode() {
         return parentNode;
     }

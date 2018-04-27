@@ -11,8 +11,6 @@ public class Main {
 
     public static void main(String[] args) {
         TreeDivider.divide(new Tree<Integer>(createTree()), 126);
-        treeSize(createTree(), 0);
-        System.out.println(list);
     }
 
     public static Node<Integer> createTree() {
@@ -25,22 +23,12 @@ public class Main {
         return root;
     }
 
-    public static void treeSize(Node<Integer> root, int size) {
-        size += root.getData();
-        if (root.getChildNodesAmount() == 0) {
-            list.add(size);
-        }
+    public static Node<Integer> createTree2() {
+        Node<Integer> root = new Node<Integer>(5);
+        root.addChildNodes(3, 4, 8);
 
-        for (Node<Integer> node: root.getChildNodesList()) {
-            treeSize(node, size);
-        }
-    }
+        root.getChildNodesList().get(1).addChildNodes(1, 2);
 
-    public static Node<Integer> moveToParentNode(Node<Integer> node) {
-        while (node.getParentNode() != null) {
-            node = node.getParentNode();
-        }
-
-        return node;
+        return root;
     }
 }

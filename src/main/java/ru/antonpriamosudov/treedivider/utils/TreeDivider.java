@@ -4,21 +4,23 @@ import ru.antonpriamosudov.treedivider.Node;
 import ru.antonpriamosudov.treedivider.Tree;
 import ru.antonpriamosudov.treedivider.exception.NotValidTreeSize;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TreeDivider {
-    private static List<Tree<Integer>> treeList = new ArrayList<Tree<Integer>>();
+    private static Set<Tree<Integer>> treeSet = new HashSet<Tree<Integer>>();
 
     public static void divide(Tree<Integer> tree, final int maxSize) {
         countSubTreeSize(tree.getRootNode(), 0, maxSize);
         Node<Integer> root = tree.getRootNode();
         subTree(root, 0, maxSize, new Node<Integer>());
-        System.out.println(treeList);
+        System.out.println(treeSet);
     }
 
     private static void subTree(Node<Integer> root, int currentSize, final int maxSize, Node<Integer> newNode) {
         if (currentSize + root.getSubTreeSize() > maxSize) {
+            currentSize += root.getData();
             newNode.setData(root.getData());
 
             Node<Integer> upLevelNode = new Node<Integer>(newNode);
@@ -30,14 +32,16 @@ public class TreeDivider {
 
                     newNode.addChildNode(node);
                 } else {
-                    treeList.add(new Tree<Integer>(newNode));
+                    treeSet.add(new Tree<Integer>(newNode));
 
-                    upLevelNode.addChildNode(new Node<Integer>());
-                    subTree(node, upLevelCurrentSize, maxSize, upLevelNode.getChildNodesList().get(0));
+                    Node<Integer> copyNode = new Node<Integer>(upLevelNode);
+                    copyNode.addChildNode(new Node<Integer>());
+                    subTree(node, upLevelCurrentSize, maxSize, copyNode.getChildNodesList().get(0));
                 }
             }
         } else {
-            treeList.add(new Tree<Integer>(root));
+            newNode.copySubTree(root);
+            treeSet.add(new Tree<Integer>(newNode));
         }
     }
 
@@ -78,13 +82,5 @@ public class TreeDivider {
         }
 
         return root.getSubTreeSize();
-    }
-
-
-    private static Node<Integer> moveNodeToRoot(Node<Integer> node) {
-        while (node.getParentNode() != null)
-            node = node.getParentNode();
-
-        return node;
     }
 }
