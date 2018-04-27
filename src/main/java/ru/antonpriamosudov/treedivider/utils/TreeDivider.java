@@ -12,9 +12,10 @@ public class TreeDivider {
     private static Set<Tree<Integer>> treeSet = new HashSet<Tree<Integer>>();
 
     public static void divide(Tree<Integer> tree, final int maxSize) {
+        treeSet.clear();
+
         countSubTreeSize(tree.getRootNode(), 0, maxSize);
-        Node<Integer> root = tree.getRootNode();
-        subTree(root, 0, maxSize, new Node<Integer>());
+        subTree(tree.getRootNode(), 0, maxSize, new Node<Integer>());
         System.out.println(treeSet);
     }
 

@@ -2,12 +2,7 @@ package ru.antonpriamosudov.treedivider;
 
 import ru.antonpriamosudov.treedivider.utils.TreeDivider;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
-
-    private static List<Integer> list = new ArrayList<Integer>();
 
     public static void main(String[] args) {
         TreeDivider.divide(new Tree<Integer>(createTree()), 126);
