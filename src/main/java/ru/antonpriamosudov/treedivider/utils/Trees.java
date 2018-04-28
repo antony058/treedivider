@@ -4,12 +4,12 @@ import ru.antonpriamosudov.treedivider.Node;
 
 public class Trees {
 
-    public static int countTreeSize(Node<Integer> root) {
+    public static int countTreeSize(Node<Object> root) {
         if (root.getChildNodesAmount() == 0)
-            return root.getData();
+            return root.getWeight();
 
-        int size = root.getData();
-        for (Node<Integer> node: root.getChildNodesList())
+        int size = root.getWeight();
+        for (Node<Object> node: root.getChildNodesList())
             size += countTreeSize(node);
 
         return size;

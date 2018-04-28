@@ -6,7 +6,8 @@ import java.util.List;
 public class Node<T> {
     private Node<T> parentNode = null;
     private List<Node<T>> childNodesList = new ArrayList<Node<T>>();
-    private T data = null;
+    private int weight;
+    private T data;
 
     private Integer subTreeSize = 0;
 
@@ -14,17 +15,20 @@ public class Node<T> {
 
     }
 
-    public Node(T data) {
+    public Node(int weight, T data) {
+        this.weight = weight;
         this.data = data;
     }
 
     public Node(Node<T> node) {
+        this.weight = node.getWeight();
         this.data = node.getData();
         this.parentNode = node.getParentNode();
     }
 
     public void copySubTree(Node<T> node) {
-        this.data = node.data;
+        this.weight = node.getWeight();
+        this.data = node.getData();
         this.childNodesList = node.getChildNodesList();
     }
 
@@ -54,10 +58,12 @@ public class Node<T> {
         childNode.setParentNode(null);
     }
 
-    public void addChildNodes(T... nodesData) {
-        for (T data: nodesData) {
-            addChildNode(new Node<T>(data));
-        }
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     public T getData() {
@@ -85,8 +91,7 @@ public class Node<T> {
         final int prime = 31;
         int result = 1;
 
-        Integer value = (Integer) data;
-        result = result * prime + value;
+        result = result * prime + weight;
 
         return result;
     }
@@ -100,8 +105,9 @@ public class Node<T> {
         if (this.getClass() != obj.getClass())
             return false;
 
-        Integer value = ((Node<Integer>) obj).getData();
-        if (data != value)
+        int value = ((Node<Object>) obj).getWeight();
+
+        if (weight != value)
             return false;
 
         return true;
