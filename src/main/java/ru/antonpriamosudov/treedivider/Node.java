@@ -9,7 +9,7 @@ public class Node<T> {
     private List<Node<T>> childNodesList = new ArrayList<Node<T>>();
     private int weight;
     private T data;
-    private String uniqueString;
+    private final String uniqueString;
 
     private Integer subTreeSize = 0;
 
@@ -34,7 +34,6 @@ public class Node<T> {
         this.weight = node.getWeight();
         this.data = node.getData();
         this.childNodesList = node.getChildNodesList();
-        this.uniqueString = node.getUniqueString();
     }
 
     public Node<T> getParentNode() {
