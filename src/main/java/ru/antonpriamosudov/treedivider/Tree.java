@@ -26,11 +26,10 @@ public class Tree<T> {
     }
 
     public Set<Tree<Object>> divide(final int maxSize) {
-        Set<Tree<Object>> treeSet = new HashSet<Tree<Object>>();
+        final Set<Tree<Object>> treeSet = new HashSet<Tree<Object>>();
 
         countSubTreeSize((Node<Object>) rootNode, 0, maxSize);
         subTree((Node<Object>) rootNode, 0, maxSize, new Node<Object>(), treeSet);
-        System.out.println(treeSet);
 
         return treeSet;
     }
@@ -100,8 +99,9 @@ public class Tree<T> {
 
         Tree<T> tree = (Tree<T>) obj;
 
-        if (!rootNode.equals(tree.getRootNode()))
+        if (!rootNode.equals(tree.getRootNode())) {
             return false;
+        }
 
         return true;
     }

@@ -2,34 +2,39 @@ package ru.antonpriamosudov.treedivider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Node<T> {
     private Node<T> parentNode = null;
     private List<Node<T>> childNodesList = new ArrayList<Node<T>>();
     private int weight;
     private T data;
+    private String uniqueString;
 
     private Integer subTreeSize = 0;
 
     public Node() {
-
+        uniqueString = UUID.randomUUID().toString();
     }
 
     public Node(int weight, T data) {
         this.weight = weight;
         this.data = data;
+        this.uniqueString = UUID.randomUUID().toString();
     }
 
     public Node(Node<T> node) {
         this.weight = node.getWeight();
         this.data = node.getData();
         this.parentNode = node.getParentNode();
+        this.uniqueString = node.getUniqueString();
     }
 
     public void copySubTree(Node<T> node) {
         this.weight = node.getWeight();
         this.data = node.getData();
         this.childNodesList = node.getChildNodesList();
+        this.uniqueString = node.getUniqueString();
     }
 
     public Node<T> getParentNode() {
@@ -86,12 +91,17 @@ public class Node<T> {
         this.subTreeSize = subTreeSize;
     }
 
+    public String getUniqueString() {
+        return uniqueString;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
 
         result = result * prime + weight;
+        result = result * prime + uniqueString.hashCode();
 
         return result;
     }
@@ -108,6 +118,10 @@ public class Node<T> {
         int value = ((Node<Object>) obj).getWeight();
 
         if (weight != value)
+            return false;
+
+        String uniqueStr = ((Node<Object>) obj).getUniqueString();
+        if (!uniqueString.equals(uniqueStr))
             return false;
 
         return true;

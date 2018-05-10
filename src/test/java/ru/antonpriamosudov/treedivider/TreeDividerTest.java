@@ -36,6 +36,7 @@ public class TreeDividerTest {
 
         node.addChildNode(new Node<Object>(7, null));
         node.addChildNode(new Node<Object>(8, null));
+        node.addChildNode(new Node<Object>(5, null));
         // Вес самое тяжелой ветки - 15 (5 -> 2 -> 8)
     }
 
@@ -90,5 +91,13 @@ public class TreeDividerTest {
         while (iterator1.hasNext() && iterator2.hasNext()) {
             Assert.assertEquals(iterator1.next(), iterator2.next());
         }
+    }
+
+    @Test
+    public void treeDivideFewSameDataTest() {
+        Tree<Object> tree = new Tree<Object>(root2);
+        Set<Tree<Object>> treeSet = tree.divide(15);
+
+        Assert.assertEquals(treeSet.size(), 4);
     }
 }
